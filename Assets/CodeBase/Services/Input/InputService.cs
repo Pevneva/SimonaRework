@@ -6,12 +6,12 @@ namespace CodeBase.Services.Input
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
-        private const string Jump = "Jump";
+        protected const string Jump = "Jump";
         private const string Fire = "Fire1";
 
         public abstract Vector2 Axis { get; }
 
-        public bool IsJumpButtonUp => UnityEngine.Input.GetButtonUp(Jump);
+        public abstract bool IsJumpButtonUp { get;  }
 
         public bool IsAttackButtonUp() => UnityEngine.Input.GetButtonUp(Fire);
         

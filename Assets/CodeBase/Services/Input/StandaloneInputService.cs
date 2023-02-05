@@ -17,6 +17,9 @@ namespace CodeBase.Services.Input
             }
         }
 
+        public override bool IsJumpButtonUp => 
+            UnityEngine.Input.GetButtonUp(Jump) || SimpleInput.GetButtonUp(Jump);
+
         private static Vector2 UnityAxis() => 
             new Vector2(UnityEngine.Input.GetAxis(Horizontal), UnityEngine.Input.GetAxis(Vertical));
     }
