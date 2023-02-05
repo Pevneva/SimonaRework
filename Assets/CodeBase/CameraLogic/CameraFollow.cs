@@ -1,15 +1,25 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CodeBase.CameraLogic
 {
     public class CameraFollow : MonoBehaviour
     {
-        [SerializeField] private Transform _following;
+        private Transform _following;
 
         private void LateUpdate()
         {
-            transform.position = new Vector3(_following.position.x, _following.position.y, -10);
+            if (_following == null)
+                return;
+            
+            transform.position = FollowingPosition();
+        }
+
+        public void Follow(GameObject following) => 
+            _following = following.transform;
+
+        private Vector3 FollowingPosition()
+        {
+            return new Vector3(_following.position.x, _following.position.y, -10);
         }
     }
 }

@@ -1,3 +1,4 @@
+using CodeBase.CameraLogic;
 using CodeBase.Infrastructure;
 using CodeBase.Services.Input;
 using UnityEngine;
@@ -18,10 +19,15 @@ namespace CodeBase.Hero
         private void Start()
         {
             _inputService = Game.InputService;
+            
+            CameraFollow();
 
             _triggerObserver.TriggerEnter += TriggerEnter;
             _triggerObserver.TriggerExit += TriggerExit;
         }
+
+        private void CameraFollow() => 
+            Camera.main.GetComponent<CameraFollow>().Follow(gameObject);
 
         private void TriggerExit(Collider2D obj) => DisableJumping();
 
