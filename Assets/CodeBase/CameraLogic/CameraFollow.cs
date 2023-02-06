@@ -17,9 +17,7 @@ namespace CodeBase.CameraLogic
         public void Follow(GameObject following) => 
             _following = following.transform;
 
-        private Vector3 FollowingPosition()
-        {
-            return new Vector3(_following.position.x, _following.position.y, -10);
-        }
+        private Vector3 FollowingPosition() => 
+            new Vector3(_following.position.x, _following.position.y, -10);
     }
 }

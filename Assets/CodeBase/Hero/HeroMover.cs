@@ -1,5 +1,7 @@
+using System;
 using CodeBase.Infrastructure;
-using CodeBase.Services.Input;
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Input;
 using UnityEngine;
 
 namespace CodeBase.Hero
@@ -15,10 +17,12 @@ namespace CodeBase.Hero
         private Vector3 _movementVector;
         private bool _isGrounded;
 
+
+        private void Awake() => 
+            _inputService = AllServices.Container.Single<IInputService>();
+
         private void Start()
         {
-            _inputService = Game.InputService;
-            
             _triggerObserver.TriggerEnter += TriggerEnter;
             _triggerObserver.TriggerExit += TriggerExit;
         }

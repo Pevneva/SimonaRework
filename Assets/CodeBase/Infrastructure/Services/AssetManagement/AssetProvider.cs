@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace CodeBase.Infrastructure
+namespace CodeBase.Infrastructure.Services.AssetManagement
 {
-    public abstract class AssetProvider : IAssetProvider
+    public class AssetProvider : IAssetProvider
     {
         public GameObject Instantiate(string path) => 
             Object.Instantiate( GetPrefab(path));

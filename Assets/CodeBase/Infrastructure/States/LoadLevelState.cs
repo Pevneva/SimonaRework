@@ -1,5 +1,5 @@
 ﻿using CodeBase.CameraLogic;
-using CodeBase.Infrastructure.Factory;
+using CodeBase.Infrastructure.Services.Factory;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -11,13 +11,14 @@ namespace CodeBase.Infrastructure.States
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly CurtainLoader _curtain;
-        private IGameFactory _gameFactory;
+        private readonly IGameFactory _gameFactory;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
+            _gameFactory = gameFactory;
         }
 
         public void Enter(string levelName)
