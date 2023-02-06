@@ -10,13 +10,13 @@ namespace CodeBase.Infrastructure
 
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader)
+        public GameStateMachine(SceneLoader sceneLoader, CurtainLoader curtain)
         {
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(TestState)] = new TestState(),
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain),
             };
         }
 
@@ -40,9 +40,7 @@ namespace CodeBase.Infrastructure
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState
-        {
-            return _states[typeof(TState)] as TState;
-        }
+        private TState GetState<TState>() where TState : class, IExitableState => 
+            _states[typeof(TState)] as TState;
     }
 }
