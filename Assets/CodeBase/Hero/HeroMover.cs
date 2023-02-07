@@ -1,12 +1,13 @@
-using System;
-using CodeBase.Infrastructure;
+using CodeBase.Data;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Input;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Hero
 {
-    public class HeroMover : MonoBehaviour
+    public class HeroMover : MonoBehaviour, ISaveProgress
     {
         [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private float _speed = 3f;
@@ -70,5 +71,31 @@ namespace CodeBase.Hero
 
         private void Jump() =>
             _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+
+        public void Load(PlayerProgress playerProgress)
+        {
+            if (CurrentLevel() == playerProgress.WorldData.PositionOnLevel.Level)
+            {
+                Vector3Data savedData = playerProgress.WorldData.PositionOnLevel.Position;
+                if (savedData != null) 
+                    SetPosition(savedData);
+            }
+        }
+
+        private void SetPosition(Vector3Data savedData)
+        {
+            _rigidBody.isKinematic = true;
+            transform.position = savedData.AsVectorUnity().AddY(1);
+            _rigidBody.isKinematic = false;
+        }
+
+        public void Save(PlayerProgress playerProgress)
+        {
+            playerProgress.WorldData.PositionOnLevel =
+                new PositionOnLevel(CurrentLevel(), transform.position.AsVectorData());
+        }
+
+        private static string CurrentLevel() => 
+            SceneManager.GetActiveScene().name;
     }
 }

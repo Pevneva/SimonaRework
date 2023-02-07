@@ -1,5 +1,7 @@
 ﻿using CodeBase.CameraLogic;
 using CodeBase.Infrastructure.Services.Factory;
+using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
@@ -12,18 +14,21 @@ namespace CodeBase.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly CurtainLoader _curtain;
         private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressService _persistentProgress;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory)
+        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory, IPersistentProgressService persistentProgress)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _gameFactory = gameFactory;
+            _persistentProgress = persistentProgress;
         }
 
         public void Enter(string levelName)
         {
             _curtain.Show();
+            _gameFactory.Cleanup();
             _sceneLoader.Load(levelName, onLoaded: OnLoaded);
         }
 
@@ -31,12 +36,24 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
-            var hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
-            _gameFactory.CreateHud();
-            
-            CameraFollow(hero);
+            InitGameWorld();
+
+            LoadProgress();
 
             _stateMachine.Enter<TestState>();
+        }
+
+        private void LoadProgress()
+        {
+            foreach (ILoadProgress loader in _gameFactory.ProgressLoaders) 
+                loader.Load(_persistentProgress.Progress);
+        }
+
+        private void InitGameWorld()
+        {
+            var hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
+            _gameFactory.CreateHud();
+            CameraFollow(hero);
         }
 
         private void CameraFollow(GameObject gameObject) => 
