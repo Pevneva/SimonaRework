@@ -11,7 +11,7 @@ namespace CodeBase.Infrastructure
         
         private void Awake()
         {
-            _game = new Game(this, _curtainPrefab);
+            _game = new Game(this, Instantiate(_curtainPrefab));
             _game.StateMachine.Enter<BootstrapState>();
             
             DontDestroyOnLoad(this);
