@@ -13,12 +13,16 @@ namespace CodeBase.Hero
         [SerializeField] private float _speed = 3f;
         [SerializeField] private float _jumpForce = 10f;
         [SerializeField] private TriggerObserver _triggerObserver;
+        [SerializeField] private Transform _gameobject;
+        [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private HeroAnimator _animator;
 
         private IInputService _inputService;
         private Vector3 _movementVector;
         private bool _isGrounded;
 
-
+        public Vector3 MovementVector => _movementVector;
+        
         private void Awake() => 
             _inputService = AllServices.Container.Single<IInputService>();
 
@@ -27,20 +31,11 @@ namespace CodeBase.Hero
             _triggerObserver.TriggerEnter += TriggerEnter;
             _triggerObserver.TriggerExit += TriggerExit;
         }
-        
-
-        private void TriggerExit(Collider2D obj) => DisableJumping();
-
-        private void EnableJumping() => _isGrounded = true;
-
-        private void TriggerEnter(Collider2D obj) => EnableJumping();
-
-        private void DisableJumping() => _isGrounded = false;
 
         private void Update()
         {
             _movementVector = Vector3.zero;
-
+            
             if (IsInputting())
                 _movementVector = SetMovementVector();
 
@@ -52,6 +47,14 @@ namespace CodeBase.Hero
             if (_inputService.IsJumpButtonUp)
                 Jump();
         }
+
+        private void TriggerExit(Collider2D obj) => DisableJumping();
+
+        private void EnableJumping() => _isGrounded = true;
+
+        private void TriggerEnter(Collider2D obj) => EnableJumping();
+
+        private void DisableJumping() => _isGrounded = false;
 
         private bool IsInputting() => 
             _inputService.Axis.sqrMagnitude > Constants.Epsilon;
@@ -66,11 +69,20 @@ namespace CodeBase.Hero
             movementVector.y = 0;
             movementVector.z = 0;
             movementVector.Normalize();
+
+            Rotate(movementVector);
+            
             return movementVector;
         }
 
-        private void Jump() =>
+        private bool Rotate(Vector3 movementVector) => 
+            _sprite.flipX = movementVector.x < 0;
+
+        private void Jump()
+        {
+            _animator.PlayJump();
             _rigidBody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        }
 
         public void Load(PlayerProgress playerProgress)
         {

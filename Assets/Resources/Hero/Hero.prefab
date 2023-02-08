@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 835829490343195953}
   - component: {fileID: 835829490343195966}
   - component: {fileID: 835829490343195967}
+  - component: {fileID: 1937386910817011761}
   - component: {fileID: 835829490343195955}
   - component: {fileID: 835829490343195954}
+  - component: {fileID: 4381088574886129888}
   m_Layer: 9
   m_Name: Hero
   m_TagString: Untagged
@@ -75,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: bb47cbfa73a78d541bac5e8cd8275ce4, type: 3}
-  m_Color: {r: 0.6259225, g: 0.26312745, b: 0.6886792, a: 1}
+  m_Sprite: {fileID: 21300000, guid: be0eee28a6af23b41b951a2a92cbbf04, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,18 +101,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05108744, y: -0.044724107}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.1906667, y: 1.331051}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5138191, y: 1.0894482}
   m_EdgeRadius: 0
 --- !u!50 &835829490343195967
 Rigidbody2D:
@@ -133,6 +135,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1937386910817011761
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835829490343195964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52ca28c687d0bbb41924bfba6287ed60, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &835829490343195955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +170,9 @@ MonoBehaviour:
   _speed: 5
   _jumpForce: 7
   _triggerObserver: {fileID: 835829490343195954}
+  _gameobject: {fileID: 0}
+  _sprite: {fileID: 835829490343195953}
+  _animator: {fileID: 4381088574886129888}
 --- !u!114 &835829490343195954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +185,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 488b219d3223c544aa0bb4eac9b022af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4381088574886129888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835829490343195964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88e8e24af3968c4388b89faaee372cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1937386910817011761}
+  HeroMover: {fileID: 835829490343195955}
