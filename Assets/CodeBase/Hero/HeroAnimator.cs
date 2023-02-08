@@ -10,7 +10,9 @@ public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     private static readonly int HitHash = Animator.StringToHash("Hit");
     private static readonly int DieHash = Animator.StringToHash("Die");
     private static readonly int StartJumpHash = Animator.StringToHash("StartJump");
-    
+    private static readonly int EndJumpHash = Animator.StringToHash("IsGrounded");
+    private static readonly int FallHash = Animator.StringToHash("StartFall");
+
     private readonly int _idleStateHash = Animator.StringToHash("Idle");
     private readonly int _idleStateFullHash = Animator.StringToHash("Base Layer.Idle");
     private readonly int _attackStateHash = Animator.StringToHash("Attack Normal");
@@ -24,9 +26,9 @@ public class HeroAnimator : MonoBehaviour, IAnimationStateReader
 
     public Animator Animator;
     public HeroMover HeroMover;
-    
 
-    private void Update() => 
+
+    private void Update() =>
         Animator.SetBool(MoveHash, HeroMover.MovementVector.magnitude > 0);
 
     public bool IsAttacking => State == AnimatorState.Attack;
@@ -39,7 +41,13 @@ public class HeroAnimator : MonoBehaviour, IAnimationStateReader
 
     public void ResetToIdle() => Animator.Play(_idleStateHash, -1);
 
-    public void PlayJump() => Animator.Play(StartJumpHash);
+    public void PlayStartJump() => Animator.Play(StartJumpHash);
+
+
+    public void PlayEndJump(bool isGrounded) => 
+        Animator.SetBool(EndJumpHash, isGrounded);
+
+    public void PlayFall() => Animator.SetTrigger(FallHash);
 
     public void EnteredState(int stateHash)
     {

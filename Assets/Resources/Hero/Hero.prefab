@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 835829490343195967}
   - component: {fileID: 1937386910817011761}
   - component: {fileID: 835829490343195955}
-  - component: {fileID: 835829490343195954}
   - component: {fileID: 4381088574886129888}
+  - component: {fileID: 4725314501700822256}
   m_Layer: 9
   m_Name: Hero
   m_TagString: Untagged
@@ -169,22 +169,9 @@ MonoBehaviour:
   _rigidBody: {fileID: 835829490343195967}
   _speed: 5
   _jumpForce: 7
-  _triggerObserver: {fileID: 835829490343195954}
-  _gameobject: {fileID: 0}
   _sprite: {fileID: 835829490343195953}
   _animator: {fileID: 4381088574886129888}
---- !u!114 &835829490343195954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 835829490343195964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488b219d3223c544aa0bb4eac9b022af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _groundDetecter: {fileID: 4725314501700822256}
 --- !u!114 &4381088574886129888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +186,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Animator: {fileID: 1937386910817011761}
   HeroMover: {fileID: 835829490343195955}
+--- !u!114 &4725314501700822256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835829490343195964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f42a87beca287f4c89410a58037369c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _detectionRange: 0.75
+  _layer:
+    serializedVersion: 2
+    m_Bits: 1024
