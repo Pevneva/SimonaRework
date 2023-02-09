@@ -7,14 +7,18 @@ namespace CodeBase.Enemy
         [SerializeField] private GameObject _leftBorder;
         [SerializeField] private GameObject _rightBorder;
         [SerializeField] private GroundDetecter _groundDetection;
-        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyMover _mover;
+        [SerializeField] private ChaseHero _chase;
+        [SerializeField] private EnemyRotation _rotation;
 
         private bool _isRightNavigation = true;
 
         private void Update()
         {
+            if (_chase.enabled)
+                return;
+            
             if (_groundDetection.IsGrounded() == false)
                 return;
 
@@ -41,12 +45,9 @@ namespace CodeBase.Enemy
 
         private void Move(Vector3 direction)
         {
-            Rotate(direction);
+            _rotation.Rotate(direction);
             _mover.Move(direction);
             _animator.Move(direction.magnitude);
         }
-
-        private void Rotate(Vector3 direction) => 
-            _spriteRenderer.flipX = direction.x >= 0;
     }
 }

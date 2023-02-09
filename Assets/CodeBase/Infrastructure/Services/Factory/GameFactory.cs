@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using CodeBase.Hero;
+﻿using System;
+using System.Collections.Generic;
 using CodeBase.Infrastructure.Services.AssetManagement;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
@@ -13,11 +13,20 @@ namespace CodeBase.Infrastructure.Services.Factory
         public List<ILoadProgress> ProgressLoaders { get; } = new List<ILoadProgress>();
         public List<ISaveProgress> ProgressSavers { get; } = new List<ISaveProgress>();
 
+        public Transform HeroTransform { get; private set; }
+
+        public event Action HeroCreated;
+
         public GameFactory(IAssetProvider assetProvider) =>
             _assetProvider = assetProvider;
 
-        public GameObject CreateHero(GameObject at) => 
-            InstantiateRegistered(AssetsPath.HeroPath, at: at.transform.position);
+        public GameObject CreateHero(GameObject at)
+        {
+            GameObject hero = InstantiateRegistered(AssetsPath.HeroPath, at: at.transform.position);
+            HeroTransform = hero.transform;
+            HeroCreated?.Invoke();
+            return hero;
+        }
 
         public void CreateHud() =>
             InstantiateRegistered(AssetsPath.HudPath);
