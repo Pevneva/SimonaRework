@@ -6,14 +6,13 @@ namespace CodeBase.Enemy
 {
     public class ChaseHero : Chase
     {
-        private const float MinimalDistance = 0.015f;
-        
+        private const float MinimalDistance = 1.1f; 
+
         [SerializeField] public Mover _mover;
-        [SerializeField] private EnemyRotation _rotation;
-        
+        [SerializeField] private EnemyRotation _rotater;
+
         private Transform _heroTransform;
         private IGameFactory _gameFactory;
-        private Vector3 _direction;
 
         private void Start()
         {
@@ -27,22 +26,19 @@ namespace CodeBase.Enemy
 
         private void Update()
         {
-            if (HeroInitialized() && HeroNotReached()) 
-                Move();
+            if (HeroInitialized() && HeroNotReached())
+            {
+                Vector3 direction = _heroTransform.position - transform.position;
+                _mover.Move(direction);
+                _rotater.Rotate(direction);
+            } 
         }
 
-        private void Move()
-        {
-            _direction = _heroTransform.position - transform.position;
-            transform.Translate(_direction * (Time.deltaTime * _mover.Speed));
-            _rotation.Rotate(_direction);
-        }
+        public bool HeroInitialized() => _heroTransform != null;
+
+        public bool HeroNotReached() => 
+            Vector3.Distance(_heroTransform.position, transform.position) >= MinimalDistance;
 
         private void InitializeHero() => _heroTransform = _gameFactory.HeroTransform;
-        
-        private bool HeroInitialized() => _heroTransform != null;
-        
-        private bool HeroNotReached() => 
-            Vector3.Distance(_heroTransform.position, transform.position) >= MinimalDistance;        
     }
 }

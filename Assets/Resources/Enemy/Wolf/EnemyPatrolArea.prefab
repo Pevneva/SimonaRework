@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1346456245910380018}
   - component: {fileID: 5202973748971981285}
   - component: {fileID: 1490361275873131596}
+  - component: {fileID: 1062657992357076972}
   - component: {fileID: 4759859012878631045}
   - component: {fileID: 2292811782131667776}
   - component: {fileID: 6542116626750604356}
@@ -200,6 +201,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
+--- !u!114 &1062657992357076972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935030761362648649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e42195b66ec478d8d4ab88f93f6210c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1346456245910380018}
+  _mover: {fileID: 1490361275873131596}
+  _chase: {fileID: 2292811782131667776}
 --- !u!114 &4759859012878631045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +231,6 @@ MonoBehaviour:
   _leftBorder: {fileID: 935030763353442255}
   _rightBorder: {fileID: 935030762901854706}
   _groundDetection: {fileID: 5202973748971981285}
-  _animator: {fileID: 1346456245910380018}
   _mover: {fileID: 1490361275873131596}
   _chase: {fileID: 2292811782131667776}
   _rotation: {fileID: 9018078972028751030}

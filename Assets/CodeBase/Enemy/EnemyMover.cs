@@ -7,14 +7,12 @@ namespace CodeBase.Enemy
         [SerializeField] private float _speed;
 
         public override float Speed => _speed;
+        public override Vector3 Direction { get; set; }
 
-        public override void Move(Vector3 direction) => 
+        public override void Move(Vector3 direction)
+        {
+            Direction = direction;
             transform.Translate(direction * (Time.deltaTime * _speed));
-    }
-
-    public abstract class Mover : MonoBehaviour
-    {
-        public abstract void Move(Vector3 direction);
-        public abstract float Speed { get;  }
+        }
     }
 }

@@ -7,13 +7,14 @@ namespace CodeBase.Enemy
         [SerializeField] private GameObject _leftBorder;
         [SerializeField] private GameObject _rightBorder;
         [SerializeField] private GroundDetecter _groundDetection;
-        [SerializeField] private EnemyAnimator _animator;
         [SerializeField] private EnemyMover _mover;
         [SerializeField] private ChaseHero _chase;
         [SerializeField] private EnemyRotation _rotation;
 
         private bool _isRightNavigation = true;
 
+        public Vector2 Direction => _isRightNavigation ? Vector2.right : Vector2.left;
+        
         private void Update()
         {
             if (_chase.enabled)
@@ -24,8 +25,9 @@ namespace CodeBase.Enemy
 
             _isRightNavigation = IsRightDirection();
 
-            Move(_isRightNavigation ? Vector2.right : Vector2.left);
+            Move(Direction);
         }
+
 
         private bool IsRightDirection()
         {
@@ -47,7 +49,6 @@ namespace CodeBase.Enemy
         {
             _rotation.Rotate(direction);
             _mover.Move(direction);
-            _animator.Move(direction.magnitude);
         }
     }
 }
