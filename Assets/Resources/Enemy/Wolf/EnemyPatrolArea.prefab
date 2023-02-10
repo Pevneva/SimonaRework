@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mover: {fileID: 1490361275873131596}
-  _rotation: {fileID: 9018078972028751030}
+  _rotater: {fileID: 9018078972028751030}
 --- !u!114 &6542116626750604356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 7133776551749826992}
   _chase: {fileID: 2292811782131667776}
+  _cooldown: 2
 --- !u!114 &9018078972028751030
 MonoBehaviour:
   m_ObjectHideFlags: 0
