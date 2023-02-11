@@ -2,13 +2,14 @@
 using CodeBase.Infrastructure.Services.PersistentProgress;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
     public class LoadProgressState : IState
     {
         private const string FirstLevelScene = "Main";
+        private const int HeroStartHp = 100;
+        
         private readonly GameStateMachine _stateMachine;
         private IPersistentProgressService _persistentProgressService;
         private ISaveLoadService _saveLoadService;
@@ -29,8 +30,13 @@ namespace CodeBase.Infrastructure
         private void LoadProgressOrInitNew() => 
             _persistentProgressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
 
-        private PlayerProgress NewProgress() => 
-            new PlayerProgress(FirstLevelScene);
+        private PlayerProgress NewProgress()
+        {
+            PlayerProgress progress = new PlayerProgress(FirstLevelScene);
+            progress.HeroState.MaxHP = HeroStartHp;
+            progress.HeroState.ResetHp();
+            return progress;
+        }
 
         public void Exit()
         {

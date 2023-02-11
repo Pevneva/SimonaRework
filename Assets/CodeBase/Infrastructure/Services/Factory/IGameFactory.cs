@@ -8,7 +8,7 @@ namespace CodeBase.Infrastructure.Services.Factory
     public interface IGameFactory : IService
     {
         GameObject CreateHero(GameObject at);
-        void CreateHud();
+        GameObject CreateHud();
         void Cleanup();
         List<ILoadProgress> ProgressLoaders { get; }
         List<ISaveProgress> ProgressSavers { get; }
