@@ -14,5 +14,6 @@ namespace CodeBase.Infrastructure.Services.Factory
         List<ISaveProgress> ProgressSavers { get; }
         Transform HeroTransform { get; }
         event Action HeroCreated;
+        void CreateArrow(GameObject hero);
     }
 }

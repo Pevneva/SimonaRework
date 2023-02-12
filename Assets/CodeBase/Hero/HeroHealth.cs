@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CodeBase.Hero
 {
-    public class HeroHealth : MonoBehaviour, ISaveProgress
+    public class HeroHealth : MonoBehaviour, ISaveProgress, IHealth
     {
         [SerializeField] private HeroAnimator _animator;
 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using CodeBase.Arrow;
+using CodeBase.Hero;
 using CodeBase.Infrastructure.Services.AssetManagement;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
@@ -30,6 +32,12 @@ namespace CodeBase.Infrastructure.Services.Factory
 
         public GameObject CreateHud() =>
             InstantiateRegistered(AssetsPath.HudPath);
+
+        public void CreateArrow(GameObject hero)
+        {
+            GameObject arrow = InstantiateRegistered(AssetsPath.ArrowPath, hero.transform.position);
+            arrow.GetComponent<ArrowMover>().Construct(hero.GetComponent<SpriteRenderer>());
+        }
 
         public void Cleanup()
         {

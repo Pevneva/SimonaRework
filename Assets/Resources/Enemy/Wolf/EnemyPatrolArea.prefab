@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 9018078972028751030}
   - component: {fileID: 334628510380124004}
   - component: {fileID: 3050087955176519452}
-  m_Layer: 0
+  - component: {fileID: 6870469488736082225}
+  m_Layer: 15
   m_Name: Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +112,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07209039, y: -0.05553472}
+  m_Offset: {x: -0.07209039, y: -0.033564806}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -122,7 +123,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0308127, y: 0.5643437}
+  m_Size: {x: 1.0308127, y: 0.6082835}
   m_EdgeRadius: 0
 --- !u!50 &935030761362648653
 Rigidbody2D:
@@ -257,6 +258,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _effectiveDistance: 0.85
+  _damage: 10
 --- !u!114 &2292811782131667776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +320,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _effectiveDistance: 1
+  _damage: 10
 --- !u!114 &3050087955176519452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +335,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 4784873357112237604}
   _enemyAttack: {fileID: 334628510380124004}
+--- !u!114 &6870469488736082225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935030761362648649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9b62faf1234ab69cf12aac2ab9f12b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1346456245910380018}
+  _current: 15
+  _max: 15
 --- !u!1 &935030762771131414
 GameObject:
   m_ObjectHideFlags: 0
