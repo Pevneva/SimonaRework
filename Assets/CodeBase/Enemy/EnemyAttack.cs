@@ -46,7 +46,7 @@ namespace CodeBase.Enemy
             if (Hit(out Collider2D hit))
             {
                 PhysicsDebug.DrawDebug(StartPoint(), 1, 3);
-                hit.gameObject.GetComponent<IHealth>().TakeDamage(_damage);
+                hit.gameObject.GetComponent<HeroHealth>().TakeDamage(_damage);
             }
         }
 
