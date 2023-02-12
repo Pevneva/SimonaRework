@@ -1,6 +1,7 @@
 ﻿using System;
 using CodeBase.Data;
 using CodeBase.Infrastructure.Services.SaveLoad;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Hero

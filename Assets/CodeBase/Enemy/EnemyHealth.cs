@@ -1,12 +1,13 @@
 ﻿using System;
 using CodeBase.Hero;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        [SerializeField] EnemyAnimator Animator;
+        [SerializeField] private EnemyAnimator Animator;
         [SerializeField] private float _current;
         [SerializeField] private float _max;
 

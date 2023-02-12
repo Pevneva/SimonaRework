@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic
 {
     public interface IHealth
     {

@@ -1,4 +1,4 @@
-﻿using CodeBase.Enemy;
+﻿using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Arrow
@@ -7,9 +7,9 @@ namespace CodeBase.Arrow
     {
         [SerializeField] private float _damage = 10;
 
-        private void OnTriggerEnter2D(Collider2D enemy)
+        private void OnTriggerEnter2D(Collider2D hittable)
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(_damage);
+            hittable.transform.parent.GetComponent<IHealth>().TakeDamage(_damage);
             Destroy(gameObject);
         }
     }
