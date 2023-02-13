@@ -112,6 +112,18 @@ PrefabInstance:
       propertyPath: _rightBorder
       value: 
       objectReference: {fileID: 935030762901854706}
+    - target: {fileID: 2947466811203727663, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5000153
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947466811203727663, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.02154398
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320661616616285192, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
+      propertyPath: _radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7909734545542982949, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
       propertyPath: m_Name
       value: Wolf

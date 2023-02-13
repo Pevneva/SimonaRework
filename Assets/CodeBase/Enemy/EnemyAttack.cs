@@ -2,7 +2,6 @@
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Factory;
-using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -43,11 +42,8 @@ namespace CodeBase.Enemy
 
         public void OnAttack()
         {
-            if (Hit(out Collider2D hit))
-            {
-                PhysicsDebug.DrawDebug(StartPoint(), 1, 3);
+            if (Hit(out Collider2D hit)) 
                 hit.gameObject.GetComponent<HeroHealth>().TakeDamage(_damage);
-            }
         }
 
         public void OnAttackEnded()
@@ -63,13 +59,10 @@ namespace CodeBase.Enemy
 
         private bool Hit(out Collider2D hit)
         {
-            int hitsCount = Physics2D.OverlapCircleNonAlloc(StartPoint(), _radius, _hits, _layer);
+            int hitsCount = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, _hits, _layer);
             hit = _hits.FirstOrDefault();
             return hitsCount > 0;
         }
-
-        private Vector3 StartPoint() => 
-            transform.position + Vector3.forward * _effectiveDistance;
 
         private void UpdateCooldown()
         {

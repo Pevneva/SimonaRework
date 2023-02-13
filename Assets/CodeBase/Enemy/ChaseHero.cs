@@ -6,7 +6,7 @@ namespace CodeBase.Enemy
 {
     public class ChaseHero : Chase
     {
-        private const float MinimalDistance = 1.1f; 
+        private const float MinimalDistance = 0.95f; 
 
         [SerializeField] public Mover _mover;
         [SerializeField] private EnemyRotation _rotater;

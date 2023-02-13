@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _stateMachine.Enter<LoadLevelState,string>(_persistentProgressService.Progress.WorldData.PositionOnLevel.Level);
+            _stateMachine.Enter<LoadScenaState,string>(_persistentProgressService.Progress.WorldData.PositionOnLevel.Level);
         }
 
         private void LoadProgressOrInitNew() => 

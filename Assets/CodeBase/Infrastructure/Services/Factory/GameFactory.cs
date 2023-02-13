@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using CodeBase.Arrow;
-using CodeBase.Hero;
 using CodeBase.Infrastructure.Services.AssetManagement;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
@@ -65,7 +64,7 @@ namespace CodeBase.Infrastructure.Services.Factory
                 RegisterSaveLoadItems(loader);
         }
 
-        private void RegisterSaveLoadItems(ILoadProgress loader)
+        public void RegisterSaveLoadItems(ILoadProgress loader)
         {
             if (loader is ISaveProgress saver)
                 ProgressSavers.Add(saver);

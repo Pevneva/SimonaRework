@@ -15,5 +15,6 @@ namespace CodeBase.Infrastructure.Services.Factory
         Transform HeroTransform { get; }
         event Action HeroCreated;
         void CreateArrow(GameObject hero);
+        void RegisterSaveLoadItems(ILoadProgress loader);
     }
 }

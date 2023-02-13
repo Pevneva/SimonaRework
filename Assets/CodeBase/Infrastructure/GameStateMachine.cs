@@ -23,7 +23,7 @@ namespace CodeBase.Infrastructure
                 [typeof(LoadProgressState)] = new LoadProgressState(this, 
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, services.Single<IGameFactory>(),
+                [typeof(LoadScenaState)] = new LoadScenaState(this, sceneLoader, curtain, services.Single<IGameFactory>(),
                     services.Single<IPersistentProgressService>()),
             };
         }

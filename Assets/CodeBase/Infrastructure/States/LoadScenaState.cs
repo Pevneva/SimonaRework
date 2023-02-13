@@ -9,9 +9,10 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class LoadLevelState : IPayLoaded<string>
+    public class LoadScenaState : IPayLoaded<string>
     {
         private const string InitialPointTag = "InitialPoint";
+        private const string EnemySpawnerTag = "EnemySpawner";
 
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -19,7 +20,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _persistentProgress;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory, IPersistentProgressService persistentProgress)
+        public LoadScenaState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory, IPersistentProgressService persistentProgress)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -54,10 +55,22 @@ namespace CodeBase.Infrastructure.States
 
         private void InitGameWorld()
         {
+            InitSpawners();
+            
             GameObject hero = _gameFactory.CreateHero(GameObject.FindWithTag(InitialPointTag));
             CameraFollow(hero);
+            
             GameObject hud = _gameFactory.CreateHud();
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<IHealth>());
+        }
+
+        private void InitSpawners()
+        {
+            foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+            {
+                var spawner =  spawnerObject.GetComponent<EnemySpawner>();
+                _gameFactory.RegisterSaveLoadItems(spawner);
+            }
         }
 
         private void CameraFollow(GameObject gameObject) => 
