@@ -20,7 +20,7 @@ namespace CodeBase.Hero
 
         private void Update()
         {
-            if (_input.IsAttackButtonUp())
+            if (_input.IsAttackButtonUp)
                 Attack();
         }
 

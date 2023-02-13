@@ -5,7 +5,7 @@ namespace CodeBase.Infrastructure.Services.Input
     public interface IInputService : IService
     {
         Vector2 Axis { get; }
-        bool IsAttackButtonUp();
-        public bool IsJumpButtonUp { get; }
+        bool IsAttackButtonUp { get; }
+        bool IsJumpButtonUp { get; }
     }
 }

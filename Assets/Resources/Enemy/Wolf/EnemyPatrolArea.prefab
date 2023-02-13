@@ -100,6 +100,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 935030762771131416}
     m_Modifications:
+    - target: {fileID: 1553692160707051736, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2536241972650066921, guid: 89725086c95f00540a2b400a77cc81fb, type: 3}
       propertyPath: _leftBorder
       value: 

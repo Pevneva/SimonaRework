@@ -7,14 +7,13 @@ namespace CodeBase.Infrastructure.Services.Input
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
         protected const string Jump = "Jump";
-        private const string Fire = "Fire1";
+        protected const string Fire = "Fire2";
 
         public abstract Vector2 Axis { get; }
 
         public abstract bool IsJumpButtonUp { get;  }
+        public abstract bool IsAttackButtonUp { get;  }
 
-        public bool IsAttackButtonUp() => UnityEngine.Input.GetButtonUp(Fire);
-        
         protected static Vector2 SimpleInputAxis() 
             => new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));
     }
