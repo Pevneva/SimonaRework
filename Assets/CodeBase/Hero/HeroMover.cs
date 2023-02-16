@@ -20,9 +20,9 @@ namespace CodeBase.Hero
         private Vector3 _movementVector;
 
         public Vector3 MovementVector => _movementVector;
-        
-        private void Awake() => 
-            _inputService = AllServices.Container.Single<IInputService>();
+
+        public void Construct(IInputService inputService) => 
+            _inputService = inputService;
 
         private void Update()
         {

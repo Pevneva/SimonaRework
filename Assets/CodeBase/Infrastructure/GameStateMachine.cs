@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Factory;
-using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.PersistentData;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
 
@@ -23,7 +23,7 @@ namespace CodeBase.Infrastructure
                 [typeof(LoadProgressState)] = new LoadProgressState(this, 
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
-                [typeof(LoadScenaState)] = new LoadScenaState(this, sceneLoader, curtain, services.Single<IGameFactory>(),
+                [typeof(LoadSceneState)] = new LoadSceneState(this, sceneLoader, curtain, services.Single<IGameFactory>(),
                     services.Single<IPersistentProgressService>()),
             };
         }

@@ -13,7 +13,7 @@ namespace CodeBase.Enemy
 
         private bool _isRightNavigation = true;
 
-        public Vector2 Direction => _isRightNavigation ? Vector2.right : Vector2.left;
+        private Vector2 Direction => _isRightNavigation ? Vector2.right : Vector2.left;
         
         private void Update()
         {
@@ -25,9 +25,9 @@ namespace CodeBase.Enemy
 
             _isRightNavigation = IsRightDirection();
 
-            Move(Direction);
+            _rotation.Rotate(Direction);
+            _mover.Move(Direction);
         }
-
 
         private bool IsRightDirection()
         {
@@ -44,11 +44,5 @@ namespace CodeBase.Enemy
 
         private bool IsLeftBorderReached() => 
             transform.position.x <= _leftBorder.transform.position.x;
-
-        private void Move(Vector3 direction)
-        {
-            _rotation.Rotate(direction);
-            _mover.Move(direction);
-        }
     }
 }

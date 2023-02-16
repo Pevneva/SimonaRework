@@ -1,5 +1,5 @@
 ﻿using CodeBase.Data;
-using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.PersistentData;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Infrastructure.States;
 
@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _stateMachine.Enter<LoadScenaState,string>(_persistentProgressService.Progress.WorldData.PositionOnLevel.Level);
+            _stateMachine.Enter<LoadSceneState,string>(_persistentProgressService.Progress.WorldData.PositionOnLevel.Level);
         }
 
         private void LoadProgressOrInitNew() => 

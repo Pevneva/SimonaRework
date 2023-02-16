@@ -1,7 +1,7 @@
 ﻿using CodeBase.CameraLogic;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services.Factory;
-using CodeBase.Infrastructure.Services.PersistentProgress;
+using CodeBase.Infrastructure.Services.PersistentData;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.Logic;
 using CodeBase.UI;
@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class LoadScenaState : IPayLoaded<string>
+    public class LoadSceneState : IPayLoaded<string>
     {
         private const string InitialPointTag = "InitialPoint";
         private const string EnemySpawnerTag = "EnemySpawner";
@@ -20,7 +20,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _persistentProgress;
 
-        public LoadScenaState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory, IPersistentProgressService persistentProgress)
+        public LoadSceneState(GameStateMachine stateMachine, SceneLoader sceneLoader, CurtainLoader curtain, IGameFactory gameFactory, IPersistentProgressService persistentProgress)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

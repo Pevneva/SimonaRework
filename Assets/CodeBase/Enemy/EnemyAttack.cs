@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using CodeBase.Hero;
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.Factory;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -9,28 +7,17 @@ namespace CodeBase.Enemy
     public class EnemyAttack : MonoBehaviour
     {
         [SerializeField] private EnemyAnimator _animator;
-        [SerializeField] private float _attackCooldown;
-        [SerializeField] private float _radius;
         [SerializeField] private LayerMask _layer;
-        [SerializeField] private float _effectiveDistance = 0.85f;
-        [SerializeField] private float _damage = 10f;
+        
+        public float AttackCooldown = 0.1f;
+        public float Radius = 1f;
+        public float Damage = 10f;
 
-        private IGameFactory _factory;
         private Transform _heroTransform;
         private float _cooldownCounter;
         private bool _isAttacking;
         private Collider2D[] _hits = new Collider2D[1];
         private bool _attackIsActive;
-
-        private void Start()
-        {
-            _factory = AllServices.Container.Single<IGameFactory>();
-
-            if (_heroTransform != null)
-                InitHeroTransform();
-            else
-                _factory.HeroCreated += InitHeroTransform;
-        }
 
         private void Update()
         {
@@ -43,12 +30,12 @@ namespace CodeBase.Enemy
         public void OnAttack()
         {
             if (Hit(out Collider2D hit)) 
-                hit.gameObject.GetComponent<HeroHealth>().TakeDamage(_damage);
+                hit.gameObject.GetComponent<HeroHealth>().TakeDamage(Damage);
         }
 
         public void OnAttackEnded()
         {
-            _cooldownCounter = _attackCooldown;
+            _cooldownCounter = AttackCooldown;
             _isAttacking = false;
         }
 
@@ -59,7 +46,7 @@ namespace CodeBase.Enemy
 
         private bool Hit(out Collider2D hit)
         {
-            int hitsCount = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, _hits, _layer);
+            int hitsCount = Physics2D.OverlapCircleNonAlloc(transform.position, Radius, _hits, _layer);
             hit = _hits.FirstOrDefault();
             return hitsCount > 0;
         }
@@ -81,8 +68,5 @@ namespace CodeBase.Enemy
             _isAttacking = true;
             _animator.PlayAttack();
         }
-
-        private void InitHeroTransform() => 
-            _heroTransform = _factory.HeroTransform;
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983f87bd75f040dbb6f6262f89bc0796, type: 3}
+  m_Name: WolfPatrol
+  m_EditorClassIdentifier: 
+  MonsterTypeId: 1
+  Hp: 31
+  Damage: 5.1
+  AttackZone: 1.2
+  AttackCooldown: 0.11
+  Speed: 1.1
+  MinimalChaseDistance: 0.9
+  Prefab: {fileID: 935030762771131414, guid: 0055bb1297748de4f81683b782dd957c, type: 3}

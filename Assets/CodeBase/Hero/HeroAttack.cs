@@ -12,10 +12,10 @@ namespace CodeBase.Hero
         private IInputService _input;
         private IGameFactory _factory;
 
-        private void Awake()
+        public void Construct(IInputService inputService, IGameFactory gameFactory)
         {
-            _input = AllServices.Container.Single<IInputService>();
-            _factory = AllServices.Container.Single<IGameFactory>();
+            _input = inputService;
+            _factory = gameFactory;
         }
 
         private void Update()

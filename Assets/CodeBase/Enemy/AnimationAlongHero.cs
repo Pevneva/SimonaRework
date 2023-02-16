@@ -17,6 +17,6 @@ namespace CodeBase.Enemy
         }
 
         private bool ShouldMove() => 
-            _mover.Direction.magnitude > 0 && _chase.HeroInitialized() && _chase.HeroNotReached();
+            _mover.Direction.magnitude > 0 && _chase.HeroNotReached();
     }
 }

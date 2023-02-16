@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CodeBase.Enemy;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using UnityEngine;
 
@@ -12,9 +12,8 @@ namespace CodeBase.Infrastructure.Services.Factory
         void Cleanup();
         List<ILoadProgress> ProgressLoaders { get; }
         List<ISaveProgress> ProgressSavers { get; }
-        Transform HeroTransform { get; }
-        event Action HeroCreated;
         void CreateArrow(GameObject hero);
         void RegisterSaveLoadItems(ILoadProgress loader);
+        GameObject SpawnMonster(MonsterTypeId typeId, Transform parent);
     }
 }

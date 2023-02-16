@@ -4,12 +4,12 @@ namespace CodeBase.Arrow
 {
     public class ArrowMover : MonoBehaviour
     {
-        [SerializeField] private float _speed = 5f;
+        [SerializeField] private float _speed = 10f;
 
         private Vector3 _direction;
-
-        public void Construct(SpriteRenderer sprite) => 
-            _direction = sprite.flipX ? Vector3.left : Vector3.right;
+        
+        public void Construct(bool isSpriteFlipX) => 
+            _direction = isSpriteFlipX ? Vector3.left : Vector3.right;
 
         private void Update() => 
             transform.Translate(_direction * (Time.deltaTime * _speed));

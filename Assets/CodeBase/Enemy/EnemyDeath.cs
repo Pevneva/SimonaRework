@@ -11,13 +11,18 @@ namespace CodeBase.Enemy
         [SerializeField] private EnemyPatrol _patrol;
         [SerializeField] private EnemyHealth _health;
 
+        private const float DeathTime = 0.7f;
+
         public event Action Happened;
 
-        private void Start() => 
+        private void Start() =>
             _health.HealthChanged += CheckDeath;
 
-        private void OnDestroy() => 
-            _health.HealthChanged -= CheckDeath;
+        private void OnDestroy()
+        {
+            if (_health != null)
+                _health.HealthChanged -= CheckDeath;
+        }
 
         private void CheckDeath()
         {
@@ -28,17 +33,17 @@ namespace CodeBase.Enemy
         private void Die()
         {
             _health.HealthChanged -= CheckDeath;
-            
+
             _animator.PlayDeath();
             _attack.enabled = false;
             _mover.enabled = false;
             _patrol.enabled = false;
-            
+
             Happened?.Invoke();
-            Invoke(nameof(DestroyEnemy), 1);
+            Invoke(nameof(DestroyEnemy), DeathTime);
         }
 
-        private void DestroyEnemy() => 
+        private void DestroyEnemy() =>
             Destroy(gameObject);
     }
 }

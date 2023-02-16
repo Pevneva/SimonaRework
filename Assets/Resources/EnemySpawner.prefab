@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeId: 1
-  _isSlain: 0
+  IsSlain: 0
 --- !u!114 &8867633837986289688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aa9fbfa35d64cf18c08d0d98c651c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: EnemySpawner_14d617d3-b8f3-4abf-a884-0c5e04194ee9
+  Id: EnemySpawner_bde1b3db-f200-4b4a-a5cf-641b6e080342
