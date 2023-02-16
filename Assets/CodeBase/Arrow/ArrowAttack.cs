@@ -10,7 +10,7 @@ namespace CodeBase.Arrow
         private void OnTriggerEnter2D(Collider2D hittable)
         {
             hittable.transform.parent.GetComponent<IHealth>().TakeDamage(_damage);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

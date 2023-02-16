@@ -16,17 +16,19 @@ namespace CodeBase.Infrastructure.Services.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
         private readonly IInputService _inputService;
+        private readonly IArrowFactory _arrowFactory;
 
         public List<ILoadProgress> ProgressLoaders { get; } = new List<ILoadProgress>();
         public List<ISaveProgress> ProgressSavers { get; } = new List<ISaveProgress>();
 
         public Transform HeroTransform { get; private set; }
         
-        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IInputService inputService)
+        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IInputService inputService, IArrowFactory arrowFactory)
         {
             _assetProvider = assetProvider;
             _staticData = staticData;
             _inputService = inputService;
+            _arrowFactory = arrowFactory;
         }
 
         public GameObject CreateHero(GameObject at)
@@ -35,6 +37,7 @@ namespace CodeBase.Infrastructure.Services.Factory
             HeroTransform = hero.transform;
             hero.GetComponent<HeroAttack>().Construct(_inputService,this);
             hero.GetComponent<HeroMover>().Construct(_inputService);
+            _arrowFactory.InitializePool(HeroTransform);
             return hero;
         }
 
@@ -43,8 +46,9 @@ namespace CodeBase.Infrastructure.Services.Factory
 
         public void CreateArrow(GameObject hero)
         {
-            GameObject arrow = InstantiateRegistered(AssetsPath.ArrowPath, hero.transform.position);
+            GameObject arrow = _arrowFactory.CreateArrow(hero.transform);
             arrow.GetComponent<ArrowMover>().Construct(hero.GetComponent<SpriteRenderer>().flipX);
+            arrow.SetActive(true);
         }
 
         public void Cleanup()
