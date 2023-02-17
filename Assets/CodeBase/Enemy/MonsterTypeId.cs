@@ -3,6 +3,6 @@
     public enum MonsterTypeId
     {
         Wolf = 1,
-        RedWolf = 2, 
+        BlueWolf = 2, 
     }
 }
