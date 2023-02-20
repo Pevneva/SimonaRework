@@ -8,6 +8,7 @@ using CodeBase.Infrastructure.Services.PersistentData;
 using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.StaticData;
+using CodeBase.UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -47,8 +48,12 @@ namespace CodeBase.Infrastructure.Services.Factory
             return hero;
         }
 
-        public GameObject CreateHud() =>
-            InstantiateRegistered(AssetsPath.HudPath);
+        public GameObject CreateHud()
+        {
+            GameObject hud = InstantiateRegistered(AssetsPath.HudPath);
+            hud.GetComponentInChildren<CoinCounter>().Construct(_progressService.Progress.WorldData);
+            return hud;
+        }
 
         public void CreateArrow(GameObject hero)
         {
