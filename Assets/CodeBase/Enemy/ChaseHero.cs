@@ -1,4 +1,5 @@
-﻿using CodeBase.Logic;
+﻿using CodeBase.Data;
+using CodeBase.Logic;
 using UnityEngine;
 
 namespace CodeBase.Enemy
@@ -8,9 +9,10 @@ namespace CodeBase.Enemy
         [SerializeField] private Mover _mover;
         [SerializeField] private EnemyRotation _rotater;
 
-        public float MinimalDistance = 0.95f; 
+        public float MinimalDistance = 0.95f;
         
         private Transform _heroTransform;
+        private Vector3 _direction;
 
         public void Construct(Transform heroTransform) => _heroTransform = heroTransform;
 
@@ -18,14 +20,14 @@ namespace CodeBase.Enemy
         {
             if (HeroNotReached())
             {
-                Vector3 direction = _heroTransform.position - transform.position;
-                direction = new Vector3(direction.x, 0, 0);
-                _mover.Move(direction);
-                _rotater.Rotate(direction);
-            } 
+                _direction = (_heroTransform.position - transform.position).AsHorizontalMoving();
+                
+                _mover.Move(_direction);
+                _rotater.Rotate(_direction);
+            }
         }
 
-        public bool HeroNotReached() => 
+        public bool HeroNotReached() =>
             Vector3.Distance(_heroTransform.position, transform.position) >= MinimalDistance;
     }
 }

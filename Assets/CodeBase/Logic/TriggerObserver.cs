@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CodeBase.Hero
+namespace CodeBase.Logic
 {
     [RequireComponent(typeof(Collider2D))]
     public class TriggerObserver : MonoBehaviour

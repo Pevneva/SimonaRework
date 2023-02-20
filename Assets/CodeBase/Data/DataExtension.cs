@@ -18,5 +18,8 @@ namespace CodeBase.Data
 
         public static Vector3 AddY(this Vector3 vector, float value) =>
             new Vector3(vector.x, vector.y + value, vector.z);
+
+        public static Vector3 AsHorizontalMoving(this Vector3 vector) =>
+            new Vector3(vector.x, 0, 0);
     }
 }

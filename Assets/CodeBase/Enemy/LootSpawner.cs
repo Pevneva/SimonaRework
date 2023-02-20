@@ -7,10 +7,10 @@ namespace CodeBase.Enemy
 {
     public class LootSpawner : MonoBehaviour
     {
-        private const float SpawningHeight = 0.8f;
-
         [SerializeField] private EnemyDeath _enemyDeath;
 
+        private const float SpawningHeight = 0.8f;
+        
         private IGameFactory _factory;
         private int _lootMin;
         private int _lootMax;

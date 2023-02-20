@@ -7,12 +7,12 @@ namespace CodeBase.Enemy
 {
     public class LootPiece : MonoBehaviour
     {
-        private const float DelayBeforeLootDestroying = 1.15f;
-        
         [SerializeField] private SpriteRenderer _sprite;
         [SerializeField] private GameObject _pickupPopup;
         [SerializeField] private TextMeshPro _lootText;
         
+        private const float DelayBeforeLootDestroying = 1.15f;
+
         private Loot _loot;
         private WorldData _worldData;
         private bool _picked;

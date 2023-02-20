@@ -8,6 +8,7 @@ namespace CodeBase.Infrastructure.Services.Factory
     public class ObjectPool
     {
         private readonly List<GameObject> _pool = new List<GameObject>();
+        
         private Transform _parent;
 
         public void Initialize(IAssetProvider assetProvider, string prefab, Transform container, int capacity)
