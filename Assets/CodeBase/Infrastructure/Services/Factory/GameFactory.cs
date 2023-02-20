@@ -4,6 +4,8 @@ using CodeBase.Enemy;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Services.AssetManagement;
 using CodeBase.Infrastructure.Services.Input;
+using CodeBase.Infrastructure.Services.PersistentData;
+using CodeBase.Infrastructure.Services.Randomizer;
 using CodeBase.Infrastructure.Services.SaveLoad;
 using CodeBase.StaticData;
 using UnityEngine;
@@ -17,18 +19,22 @@ namespace CodeBase.Infrastructure.Services.Factory
         private readonly IStaticDataService _staticData;
         private readonly IInputService _inputService;
         private readonly IArrowFactory _arrowFactory;
+        private readonly IRandomService _randomService;
+        private readonly IPersistentProgressService _progressService;
 
         public List<ILoadProgress> ProgressLoaders { get; } = new List<ILoadProgress>();
         public List<ISaveProgress> ProgressSavers { get; } = new List<ISaveProgress>();
 
-        public Transform HeroTransform { get; private set; }
+        private Transform HeroTransform { get; set; }
         
-        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IInputService inputService, IArrowFactory arrowFactory)
+        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticData, IInputService inputService, IArrowFactory arrowFactory, IRandomService randomService, IPersistentProgressService progressService)
         {
             _assetProvider = assetProvider;
             _staticData = staticData;
             _inputService = inputService;
             _arrowFactory = arrowFactory;
+            _randomService = randomService;
+            _progressService = progressService;
         }
 
         public GameObject CreateHero(GameObject at)
@@ -49,6 +55,42 @@ namespace CodeBase.Infrastructure.Services.Factory
             GameObject arrow = _arrowFactory.CreateArrow(hero.transform);
             arrow.GetComponent<ArrowMover>().Construct(hero.GetComponent<SpriteRenderer>().flipX);
             arrow.SetActive(true);
+        }
+
+        public GameObject CreateMonster(MonsterTypeId typeId, Transform parent)
+        {
+            MonsterStaticData monsterData = _staticData.ForMonster(typeId);
+
+            GameObject monster = Object.Instantiate(_staticData.ForMonster(typeId).Prefab, parent.position,
+                Quaternion.identity, parent);
+
+            EnemyHealth health = monster.GetComponentInChildren<EnemyHealth>();
+            health.Max = monsterData.Hp;
+            health.Current = monsterData.Hp;
+
+            EnemyAttack attack = monster.GetComponentInChildren<EnemyAttack>();
+            attack.Radius = monsterData.AttackZone;
+            attack.Damage = monsterData.Damage;
+            attack.AttackCooldown = monsterData.AttackCooldown;
+
+            monster.GetComponentInChildren<EnemyMover>().Speed = monsterData.MoveSpeed;
+            
+            LootSpawner lootSpawner = monster.GetComponentInChildren<LootSpawner>();
+            lootSpawner.Construct(this, _randomService);
+            lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            
+            ChaseHero chaseHero = monster.GetComponentInChildren<ChaseHero>();
+            chaseHero.Construct(HeroTransform);
+            chaseHero.MinimalDistance = monsterData.MinimalChaseDistance;
+            
+            return monster;
+        }
+
+        public LootPiece CreateLoot()
+        {
+            LootPiece lootPiece = InstantiateRegistered(AssetsPath.LootPath).GetComponent<LootPiece>();
+            lootPiece.Construct(_progressService.Progress.WorldData);
+            return lootPiece;
         }
 
         public void Cleanup()
@@ -83,30 +125,6 @@ namespace CodeBase.Infrastructure.Services.Factory
                 ProgressSavers.Add(saver);
 
             ProgressLoaders.Add(loader);
-        }
-
-        public GameObject SpawnMonster(MonsterTypeId typeId, Transform parent)
-        {
-            MonsterStaticData monsterData = _staticData.ForMonster(typeId);
-
-            GameObject monster = Object.Instantiate(_staticData.ForMonster(typeId).Prefab, parent.position,
-                Quaternion.identity, parent);
-
-            EnemyHealth health = monster.GetComponentInChildren<EnemyHealth>();
-            health.Max = monsterData.Hp;
-            health.Current = monsterData.Hp;
-
-            EnemyAttack attack = monster.GetComponentInChildren<EnemyAttack>();
-            attack.Radius = monsterData.AttackZone;
-            attack.Damage = monsterData.Damage;
-            attack.AttackCooldown = monsterData.AttackCooldown;
-
-            monster.GetComponentInChildren<EnemyMover>().Speed = monsterData.Speed;
-            ChaseHero chaseHero = monster.GetComponentInChildren<ChaseHero>();
-            chaseHero.Construct(HeroTransform);
-            chaseHero.MinimalDistance = monsterData.MinimalChaseDistance;
-            
-            return monster;
         }
     }
 }

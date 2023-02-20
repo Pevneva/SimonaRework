@@ -48,6 +48,7 @@ Transform:
   - {fileID: 3978217164289551961}
   - {fileID: 1058745675050481665}
   - {fileID: 1918521579385922420}
+  - {fileID: 7785476837015132882}
   m_Father: {fileID: 935030762771131416}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -349,6 +350,8 @@ MonoBehaviour:
   _mover: {fileID: 1490361275873131596}
   _patrol: {fileID: 4759859012878631045}
   _health: {fileID: 6870469488736082225}
+  _checkAttackRange: {fileID: 3050087955176519452}
+  _chase: {fileID: 2292811782131667776}
 --- !u!114 &6192473339926965579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 935030762771131416}
   m_Layer: 0
-  m_Name: EnemyPatrolArea
+  m_Name: EnemyBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,6 +833,50 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &5406026758267276134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7785476837015132882}
+  - component: {fileID: 2604333435685671785}
+  m_Layer: 0
+  m_Name: LootSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7785476837015132882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406026758267276134}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 935030761362648651}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2604333435685671785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406026758267276134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2ead115fd74cc78580001cd7e623b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDeath: {fileID: 8615270429001772537}
 --- !u!1 &6596451587798864168
 GameObject:
   m_ObjectHideFlags: 0

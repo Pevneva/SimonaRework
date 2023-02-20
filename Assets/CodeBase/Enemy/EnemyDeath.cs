@@ -10,6 +10,8 @@ namespace CodeBase.Enemy
         [SerializeField] private EnemyMover _mover;
         [SerializeField] private EnemyPatrol _patrol;
         [SerializeField] private EnemyHealth _health;
+        [SerializeField] private CheckAttackRange _checkAttackRange;
+        [SerializeField] private ChaseHero _chase;
 
         private const float DeathTime = 0.7f;
 
@@ -38,6 +40,8 @@ namespace CodeBase.Enemy
             _attack.enabled = false;
             _mover.enabled = false;
             _patrol.enabled = false;
+            _checkAttackRange.enabled = false;
+            _chase.enabled = false;
 
             Happened?.Invoke();
             Invoke(nameof(DestroyEnemy), DeathTime);

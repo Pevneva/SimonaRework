@@ -32,7 +32,7 @@ namespace CodeBase.Logic
 
         private void Spawn()
         {
-            _monster = _gameFactory.SpawnMonster(_typeId, transform);
+            _monster = _gameFactory.CreateMonster(_typeId, transform);
             _enemyDeath = _monster.GetComponentInChildren<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }

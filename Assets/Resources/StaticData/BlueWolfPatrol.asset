@@ -15,8 +15,10 @@ MonoBehaviour:
   MonsterTypeId: 2
   Hp: 50
   Damage: 10
-  AttackZone: 1.2
   AttackCooldown: 0
-  Speed: 1.1
+  MoveSpeed: 1
+  MinLoot: 3
+  MaxLoot: 7
+  AttackZone: 1.2
   MinimalChaseDistance: 0.9
   Prefab: {fileID: 2076995853529993657, guid: 9dc847b27d9e4d748b9dc09a2d4a27bc, type: 3}

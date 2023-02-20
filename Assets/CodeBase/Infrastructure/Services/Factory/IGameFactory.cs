@@ -14,6 +14,7 @@ namespace CodeBase.Infrastructure.Services.Factory
         List<ISaveProgress> ProgressSavers { get; }
         void CreateArrow(GameObject hero);
         void RegisterSaveLoadItems(ILoadProgress loader);
-        GameObject SpawnMonster(MonsterTypeId typeId, Transform parent);
+        GameObject CreateMonster(MonsterTypeId typeId, Transform parent);
+        LootPiece CreateLoot();
     }
 }
